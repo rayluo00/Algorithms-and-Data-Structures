@@ -1,0 +1,113 @@
+\documentclass{article}%
+\usepackage{amsmath}%
+\usepackage{amsfonts}%
+\usepackage{amssymb}%
+\usepackage{graphicx}
+%-------------------------------------------
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\setlength{\textwidth}{7.0in}
+\setlength{\oddsidemargin}{-0.35in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\textheight}{9.0in}
+\setlength{\parindent}{0.3in}
+\begin{document}
+
+\begin{flushright}
+\textbf{Weiming Raymond Luo \\
+September 21, 2016}
+\end{flushright}
+
+\begin{center}
+\textbf{CS 405: Algorithm Analysis II \\
+Homework 1} \\
+\end{center}
+
+\section*{Solutions.}
+\begin{enumerate}
+
+\item For a fixed integer $k > 0$ and a fixed real $\epsilon > 0$, we can solve this using L'Hopital's Rule.
+
+\[
+\lim_{n\to\infty} \frac{(\ln n)^k}{n^\epsilon} \rightarrow 
+\frac{k(\ln n)^{k-1} \cdot \frac{1}{n}}{\epsilon \cdot n^{\epsilon-1}} \rightarrow 
+\frac{k}{\epsilon} \cdot \frac{(\ln n)^{k-1}}{n^{\epsilon}} \rightarrow
+\frac{k}{\epsilon} \cdot \frac{(k-1) \cdot (\ln n)^{k-2} \cdot \frac{1}{n}}{\epsilon \cdot n^{\epsilon-1}} \rightarrow
+\frac{k(k-1)}{\epsilon^{2}} \cdot \frac{(\ln n)^{k-2}}{n^{\epsilon}} \rightarrow \]
+$\newline$
+\[ 
+\frac{k(k-1)(k-2)...(2)(1)}{\epsilon^{k-1}} \cdot \frac{\ln n}{n^{\epsilon}} \rightarrow
+\frac{k!}{\epsilon^{k-1}} \cdot \frac{\ln n}{n^{\epsilon}} \rightarrow
+\frac{k!}{\epsilon^{k-1}} \cdot \frac{\frac{1}{n}}{\epsilon \cdot n^{\epsilon-1}} \rightarrow
+\frac{k!}{\epsilon^{k}} \cdot \frac{1}{n^{\epsilon}} \rightarrow 0
+\]
+
+\item Given that $a=2, b=4, f(n)=n^2$ and $g(n)=n^{log_{4}(2)}=n^{\frac{1}{2}}$. Since,\\\\
+$\frac{f(n)}{g(n)} \rightarrow \frac{n^2}{n^{0.5+\epsilon}} \rightarrow \infty$
+\\\\We can determine that as $n \rightarrow \infty$ for any $0 < \epsilon < 1.5$. This shows $f(n) = \omega(n^{0.5+\epsilon})$ which means $f(n) = \Omega(n^{0.5+\epsilon})$. Case (c) of the Master Theorem may apply if we can satisfy the equation, $af(n/b) \leq cf(n)$ for some constant c that is $0 < c < 1$. 
+\\\\We can show this from the following,
+\\\\$2(\frac{n}{4})^2 \rightarrow
+\frac{2n^2}{16} \rightarrow
+\frac{n^2}{8} \rightarrow
+\frac{1}{8}f(n) = cf(n)$
+\\\\Thus, $c = \frac{1}{8}$ satisfies the condition and we can conclude that $T(n)=\Theta(f(n))=\Theta(n^2)$.
+
+\item Given that $a=4, b=2, f(n)=n\lg n$ and $g(n)=n^{log_{2}(4)}=n^{2}$. Since,\\\\
+$\frac{f(n)}{g(n)} \rightarrow \frac{n\lg n}{n^{2-\epsilon}} \rightarrow 0$
+\\\\This shows that as $n \rightarrow 0$ for any $0 < \epsilon < 1$, then $f(n)=o(2-\epsilon)$ which means $f(n) = O(2-\epsilon)$. Case (a) of the Master Theorem can be applied, therefore $T(n)= \Theta(n^{log_2(4)}) = \Theta(n^{2})$
+
+\item Given that $a=27, b=3, f(n)=54n^3$ and $g(n)=n^{log_3(27)} = n^{3}$. Since,\\\\
+$\frac{f(n)}{g(n)} \rightarrow \frac{54n^3}{n^{3}}$\\\\
+This implies that $f(n^3)=\Theta(n^{log_3(27)}) \rightarrow f(n^3) = \Theta(n^3)$. Therefore we can use Case (b) of the Master Theorem, concluding that $T(n) = \Theta(n^{log_3(27)} \cdot \lg n) = \Theta(n^3 \lg n)$.
+
+\item Given that $a=2, b=2, f(n)=\frac{n}{\lg n}$ and $g(n)=n^{log_2(2)}=n$. Since,\\\\
+$\frac{f(n)}{g(n)} \rightarrow \frac{\frac{n}{\lg n}}{n} \rightarrow \frac{1}{\lg n}$
+\\\\We determine that the Master Theorem can not be applied.
+
+\item I. If case (a) is true, this means for some $\epsilon > 0$ then $f(n) = O(n^{log_{b}(a)-\epsilon})$. Suppose for some constant $A > 0$ and for some large $n$. \\\\
+$\frac{f(n)}{g(n)} \leq \frac{An^{log_{b}(a)-\epsilon}}{n^{log_{b}(a)}} \rightarrow \frac{A \cdot \frac{n^{log_b(a)}}{n^\epsilon}}{n^{log_b(a)}} \rightarrow 
+\frac{A}{n^{\epsilon}} \rightarrow 0$ \\\\
+This proves that for some large $n$, $f(n) \not\in \Omega(n^{log_{b}(a)})$ and $f(n) \not\in \Theta(n^{log_{b}(a)})$. Thus case (b) would fail. Similarly,\\\\
+$\frac{f(n)}{g(n)} \leq \frac{An^{log_b(a)-\epsilon}}{n^{log_b(a)+\epsilon}} \rightarrow \frac{A \cdot \frac{n^{log_b(a)}}{n^\epsilon}}{n^{log_b(a)} \cdot n^\epsilon}
+\rightarrow \frac{A}{n^{2\epsilon}} \rightarrow 0$ \\\\
+This proves that for some large $n$ and for some $\epsilon>0$, $f(n) \not\in \Omega(n^{log_b(a)+\epsilon})$. Thus case (c) would fail.\\\\
+
+II. If case (b) is true, for some large $n$ and $K_1 \leq \frac{f(n)}{g(n)} \leq K_2 \rightarrow K_1g(n) \leq f(n) \leq K_2g(n)$ then $f(n)=\Theta(n^{log_b(a)})$. Suppose for some large $n$.\\\\
+$\frac{f(n)}{g(n)} \geq \frac{K_1n^{log_b(a)}}{n^{log_b(a)-\epsilon}} \rightarrow
+\frac{K_1n^{log_b(a)}}{\frac{n^{log_b(a)}}{n^\epsilon}} \rightarrow K_1n^\epsilon \rightarrow \infty$\\\\
+For any $\epsilon>0$ and for some large $n$ then $f(n) \not\in O(n^{log_b(a)-\epsilon})$ for all $\epsilon > 0$. Thus case (a) would fail. Similarly,\\\\
+$\frac{f(n)}{g(n)} \leq \frac{K_2n^{log_b(a)}}{n^{log_b(a)+\epsilon}} \rightarrow
+\frac{K_2n^{log_b(a)}}{n^{log_b(a)} \cdot n^\epsilon} \rightarrow \frac{K_2}{n^\epsilon} 
+\rightarrow 0$\\\\
+This shows that for any $\epsilon>0$ and for some large $n$ then $f(n) \not\in \Omega(n^{log_b(a)+\epsilon})$ for all $\epsilon > 0$. Therefore, case (c) would fail.\\\\
+
+III. If case (c) is true, for some large $n$ then $f(n)=\Omega(n^{log_b(a)+\epsilon})$. Suppose for some constant $A>0$.\\\\
+$\frac{f(n)}{g(n)} \geq \frac{An^{log_b(a)+\epsilon}}{n^{log_b(a)-\epsilon}} \rightarrow \frac{A \cdot n^{log_b(a)} \cdot n^{\epsilon}}{\frac{n^{log_b(a)}}{n^\epsilon}} \rightarrow An^{2\epsilon} \rightarrow \infty$\\\\
+For some $\epsilon > 0$ and for some large $n$, $f(n) \not\in O(n^{log_b(a)-\epsilon})$. Thus case (a) will fail. Similarly,\\\\
+$\frac{f(n)}{g(n)} \geq \frac{An^{log_b(a)+\epsilon}}{n^{log_b(a)}} \rightarrow
+\frac{A \cdot n^{log_b(a)} \cdot n^\epsilon}{n^{log_b(a)}} \rightarrow An^\epsilon \rightarrow \infty$\\\\
+This shows that for some large $n$, $f(n) \not\in O(n^{log_b(a)})$ and $f(n) \not\in \Theta(n^{log_b(a)})$. Therefore, case (b) would fail.
+
+\end{enumerate}
+
+\end{document}
