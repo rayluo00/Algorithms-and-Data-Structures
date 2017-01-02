@@ -1,8 +1,8 @@
 make :
-	javac graphCycle.java graphData.java
+	javac GraphCycle.java GraphData.java
 
 run :
-	java graphCycle graphData g2.txt
+	java GraphCycle GraphData g2.txt
 
 clean :
 	rm -f *~
