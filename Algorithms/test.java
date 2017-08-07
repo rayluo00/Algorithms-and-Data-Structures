@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class test {
+    //-------------------------------------------------------------------------
     public static int fib(int n){
         if (n <= 2) {
             return 1;
@@ -9,6 +10,7 @@ public class test {
         }
     }
 
+    //-------------------------------------------------------------------------
     public static int fac(int n){
         if (n == 1) {
             return 1;
@@ -17,17 +19,17 @@ public class test {
         }
     }
 
+    //-------------------------------------------------------------------------
     public static void subarrays(int[] arr, int n){
-        int sz = arr.length;
-        int[] sum = new int[sz];
-        int curr_sum = 0;
         int src = -1;
         int dst = -1;
+        int curr_sum = 0;
+        int sz = arr.length;
+        int[] sum = new int[sz];
         
         for (int i = 0; i < sz; i++) {
             curr_sum += arr[i];
             sum[i] = curr_sum;
-
             //System.out.println("cs: "+curr_sum);
             
             if (curr_sum > n) {
@@ -49,8 +51,8 @@ public class test {
                 break;
             }
         }
-        //System.out.println(src+" "+dst);
 
+        //System.out.println(src+" "+dst);
         if (src != -1 && dst != -1) {
             for (int k = src; k <= dst; k++) {
                 System.out.println(arr[k]);
@@ -60,6 +62,7 @@ public class test {
         }
     }
 
+    //-------------------------------------------------------------------------
     public static void permutation(String word){
         permutation("", word);
     }
@@ -68,7 +71,6 @@ public class test {
         int n = word.length();
 
         System.out.println(pre+" | "+word);
-
         if (n == 0) {
             System.out.println(pre+"\n");
         } else {
@@ -78,10 +80,9 @@ public class test {
         }
     }
 
+    //-------------------------------------------------------------------------
     public static void substrings(String s){
-        int l;
-        
-        l = s.length();
+        int l = s.length();
 
         for (int i = 0; i < l; i++) {
             for (int j = 1; j <= l-i; j++) {
@@ -90,6 +91,7 @@ public class test {
         }
     }
 
+    //-------------------------------------------------------------------------
     public static void hanoiTower (int n) {
         Stack l = new Stack();
         Stack r = new Stack();
@@ -102,11 +104,9 @@ public class test {
         System.out.println("L: "+Arrays.toString(l.toArray())+
                 "\nM: "+Arrays.toString(m.toArray())+
                 "\nR: "+Arrays.toString(r.toArray()));
-
-        
-    
     }
 
+    //-------------------------------------------------------------------------
     public static void main (String[] args) {
         //int[] arr = {-10, 0, 2, -2, -20, 10};
         int[] arr = {1, 4, 20, 3, 10, 5};
